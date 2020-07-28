@@ -60,6 +60,17 @@ $(endif)
     <tr><td align="right">Expired <i <i class="icon icon-calendar">&#xe806;</i> </td><td style="padding-top:0px; padding-left:2px;"><iframe id="exp" frameborder="0" scrolling="no" src="about:blank"></iframe></td></tr>
 
 </table>
+
+<div id="app">
+<!-- covid19 -->
+<h4>Informasi Covid19 di Indonesia</h4>
+<table class="table2" v-if="covid !== null">
+    <tr><td align="right" style="width: 40%;">Positif <i class="icon icon-sitemap">&#xf0e8;</i> </td><td>{{covid.jumlahKasus}}</td></tr>
+    <tr><td align="right" style="width: 40%;">Sembuh <i class="icon icon-sitemap">&#xf0e8;</i> </td><td>{{covid.sembuh}}</td></tr>
+    <tr><td align="right" style="width: 40%;">Meninggal <i class="icon icon-sitemap">&#xf0e8;</i> </td><td>{{covid.meninggal}}</td></tr>
+</table>
+</div>
+
 $(if login-by-mac != 'yes')
 <br>
 <!-- user manager link. if user manager resides on other router, replace $(hostname) by its address
@@ -78,6 +89,29 @@ $(endif)
     var getvalid = url+usr+"&session="+SessionName
     document.getElementById('exp').src = getvalid;
         
+</script>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: "#app",
+        data() {
+            return {
+                covid: null,
+            }
+        },
+        created() {
+            this.getData();
+        },
+        methods: {
+            getData: function () {
+                fetch('https://indonesia-covid-19.mathdro.id/api')
+                    .then(response => response.json())
+                    .then(json => {
+                        this.covid = json;
+                    })
+            }
+        },
+    })
 </script>
 </body>
 </html>
