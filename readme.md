@@ -86,4 +86,15 @@ Untuk menggunakan fitur QR CODE SCANNER Anda perlu menambahkan script berikut di
 add action=accept comment="Mikhmon QR Code Scanner" disabled=no dst-host=laksa19.github.io
 
 ```
+
 Centang HTTP PAP di hotspot server profile.
+
+## Fitur Informasi Covid19
+
+Untuk menambah fitur informasi Covid19 di halaman login Anda perlu menambahkan script berikut di MikroTik via Terminal
+```
+/ip hotspot walled-garden ip
+
+add action=accept comment="Covid19 information" disabled=no dst-host=indonesia-covid-19.mathdro.id
+
+```
